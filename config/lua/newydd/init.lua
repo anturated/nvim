@@ -1,4 +1,5 @@
 -- keybinds need to happen before plugin loading
+require("newydd.config.treesitter")
 require("newydd.config.keymaps")
 require("newydd.config.options")
 
