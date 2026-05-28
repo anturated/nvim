@@ -51,9 +51,9 @@ vim.o.timeoutlen         = 300 -- which-key popup delay
 vim.o.clipboard          = "unnamedplus"
 vim.o.mouse              = "a"
 vim.o.pumheight          = 10 -- max completion items shown
-vim.opt.conceallevel       = 0
+vim.opt.conceallevel     = 0
 vim.o.cmdheight          = 0
-vim.o.showtabline        = 0  -- TODO: change back to 2 if doesn't work too well
+vim.o.showtabline        = 2
 vim.o.laststatus         = 3
 vim.opt.shortmess:append("sIc") -- suppress various noisy messages
 vim.o.title       = true

@@ -52,6 +52,7 @@ wrapNeovim {
     aerial-nvim
     mini-icons
     indent-blankline-nvim
+    heirline-nvim
 
   ];
 
