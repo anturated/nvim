@@ -66,7 +66,7 @@ return {
           },
         },
 
-        notifier = { enabled = true, timeout = 3000 },
+        notifier = { enabled = false, timeout = 3000 }, -- fidget
         picker = { enabled = true },
         bigfile = { enabled = true }, -- disable features for large files
         lazygit = { enabled = true },
@@ -144,13 +144,13 @@ return {
           end,
           desc = "Find colorschemes",
         },
-        {
-          "<leader>fn",
-          function()
-            Snacks.picker.notifications()
-          end,
-          desc = "Find notifications",
-        },
+        -- {
+        --   "<leader>fn",
+        --   function()
+        --     Snacks.picker.notifications()
+        --   end,
+        --   desc = "Find notifications",
+        -- },
         -- LSP
         {
           "<leader>ls",

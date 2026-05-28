@@ -75,6 +75,7 @@ return {
       require("fidget").setup({
         notification = {
           window = { normal_hl = "MsgArea", winblend = 100 },
+          override_vim_notify = true,
         },
         progress = {
           display = { done_icon = "󰗡" },
