@@ -81,7 +81,7 @@ wrapNeovim {
     formatter-nvim
     SchemaStore-nvim
     nvim-lint
-
+    resession-nvim
   ];
 
   # binary deps
