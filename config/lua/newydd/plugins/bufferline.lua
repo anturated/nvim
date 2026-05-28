@@ -9,9 +9,31 @@ return {
 
     event = "DeferredUIEnter",
     after = function()
+      local heirline = require("heirline")
       local utils = require("heirline.utils")
-      local function hl(name) return utils.get_highlight(name) end
       local buf_nav = require("newydd.lib.buf_nav")
+
+      -- auto reloaded on colorscheme and loaded on... load.
+      -- HACK: this just doesn't feel right
+      -- but oh well
+      local function setup_colors()
+        return {
+          TabLineBg = utils.get_highlight("TabLine").bg,
+          TabLineFg = utils.get_highlight("TabLine").fg,
+          TabLineSelBg = utils.get_highlight("TabLineSel").bg,
+          TabLineSelFg = utils.get_highlight("TabLineSel").fg,
+          TabLineFillBg = utils.get_highlight("TabLineFill").bg,
+          TabLineFillFg = utils.get_highlight("TabLineFill").fg,
+          GitSignsDeleteFg = utils.get_highlight("GitSignsDelete").fg,
+        }
+      end
+
+      local function hl(name)
+        return {
+          bg = name .. "Bg",
+          fg = name .. "Fg",
+        }
+      end
 
       ------------------------------------
       --- THE BIG AND HORRIBLE TABLINE ---
@@ -228,7 +250,17 @@ return {
       }
 
       buf_nav.setup()
-      require("heirline").setup(opts)
+      heirline.setup(opts)
+      heirline.load_colors(setup_colors)
+
+      -- auto reload colors on colorscheme
+      vim.api.nvim_create_augroup("Heirline", { clear = true })
+      vim.api.nvim_create_autocmd("ColorScheme", {
+        callback = function()
+          utils.on_colorscheme(setup_colors)
+        end,
+        group = "Heirline",
+      })
 
       ------------------------------------
       --- THE EVER COMPLICATED KEYMAPS ---
