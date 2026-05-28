@@ -1,11 +1,22 @@
 {
+  lib,
+
+  # binary deps
+  lazygit,
+
+  # stuff that makes this work
   wrapNeovim,
   neovim-unwrapped,
   vimPlugins,
 
+  bundleLSPs ? true,
   newyddVersion,
 }:
-
+let
+  inherit (lib) optionals flatten;
+  # HACK: YOLO for now
+  grammars = vimPlugins.nvim-treesitter.withAllGrammars;
+in
 wrapNeovim {
   pname = "newydd";
 
@@ -19,17 +30,31 @@ wrapNeovim {
 
   userConfig = ../config;
 
-  # all the plugins that should be stored in the neovim start directory
-  # these are the plugins that are loaded when neovim starts
-  startPlugins = with vimPlugins; [
-    nvim-treesitter.withAllGrammars
-  ];
+  # plugins loaded on startup
+  startPlugins =
+    with vimPlugins;
+    [
+      lz-n # lazy.nvim stuff without installer
+      lzn-auto-require # ???
+      nvim-lspconfig
+      plenary-nvim # dep for a lot of stuff
+    ]
+    ++ [ grammars ]; # treesitter grammars
 
-  # these are plugins that are loaded on demand by your configuration
+  # plugins loaded on demand
   optPlugins = with vimPlugins; [
+    snacks-nvim
   ];
 
-  # these are any extra packages that should be available in your neovim environment
-  extraPackages = [
+  # binary deps
+  extraPackages = flatten [
+    [
+      lazygit
+    ]
+
+    # lsps if you want
+    (optionals bundleLSPs [
+
+    ])
   ];
 }
