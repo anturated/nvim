@@ -44,6 +44,8 @@ wrapNeovim {
   # plugins loaded on demand
   optPlugins = with vimPlugins; [
     snacks-nvim
+    gitsigns-nvim
+
   ];
 
   # binary deps
