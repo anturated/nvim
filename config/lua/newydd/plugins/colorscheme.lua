@@ -7,7 +7,7 @@ return {
         editor = { transparent_background = true },
         theme = {
           variant = "winter",
-          accent = "purple",
+          accent = "lime",
         },
       }
 
