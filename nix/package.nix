@@ -21,6 +21,8 @@
   taplo,
   yaml-language-server,
   vscode-langservers-extracted,
+  lua-language-server,
+  stylua,
 
   # stuff that makes this work
   wrapNeovim,
@@ -67,7 +69,7 @@ wrapNeovim {
     lualine-nvim
     neo-tree-nvim
     nui-nvim
-    aerial-nvim
+    nvim-navic
     mini-icons
     indent-blankline-nvim
     heirline-nvim
@@ -98,6 +100,7 @@ wrapNeovim {
     (optionals bundleLSPs [
       # json and by conincidence web stuff
       vscode-langservers-extracted
+
       # md
       harper
       marksman
@@ -118,6 +121,8 @@ wrapNeovim {
       proselint
       taplo # toml
       yaml-language-server # yaml
+      lua-language-server
+      stylua
     ])
   ];
 }

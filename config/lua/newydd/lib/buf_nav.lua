@@ -14,32 +14,36 @@ end
 function M.assign()
   M.letter_to_buf = {}
   M.buf_to_letter = {}
-  local used      = {}
-  local pending   = {}
+  local used = {}
+  local pending = {}
 
   for _, buf in ipairs(listed_bufs()) do
     local name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(buf), ":t:r")
-    if name == "" then name = "scratch" end
+    if name == "" then
+      name = "scratch"
+    end
     local assigned = false
     for i = 1, #name do
       local ch = name:sub(i, i):lower()
       if ch:match("[a-z]") and not used[ch] then
-        used[ch]             = true
-        M.letter_to_buf[ch]  = buf
+        used[ch] = true
+        M.letter_to_buf[ch] = buf
         M.buf_to_letter[buf] = ch
-        assigned             = true
+        assigned = true
         break
       end
     end
-    if not assigned then table.insert(pending, buf) end
+    if not assigned then
+      table.insert(pending, buf)
+    end
   end
 
   -- fallback
   for _, buf in ipairs(pending) do
     for _, ch in ipairs(vim.split("abcdefghijklmnopqrstuvwxyz", "")) do
       if not used[ch] then
-        used[ch]             = true
-        M.letter_to_buf[ch]  = buf
+        used[ch] = true
+        M.letter_to_buf[ch] = buf
         M.buf_to_letter[buf] = ch
         break
       end
@@ -59,7 +63,9 @@ function M.pick(callback)
   local hints = {}
   for letter, buf in pairs(M.letter_to_buf) do
     local name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(buf), ":t")
-    if name == "" then name = "[No Name]" end
+    if name == "" then
+      name = "[No Name]"
+    end
     table.insert(hints, string.format("[%s]%s", letter, name))
   end
   table.sort(hints)
@@ -72,17 +78,23 @@ function M.pick(callback)
   vim.cmd("redrawtabline")
 
   -- if it was <esc> do nothing
-  if not ok or ch == "\27" then return end
+  if not ok or ch == "\27" then
+    return
+  end
 
   -- otherwise go to the buffer
   local buf = M.letter_to_buf[ch]
-  if buf then callback(buf) end
+  if buf then
+    callback(buf)
+  end
 end
 
 function M.setup()
   M.assign()
   vim.api.nvim_create_autocmd({ "BufAdd", "BufDelete", "BufWipeout", "SessionLoadPost" }, {
-    callback = function() M.assign() end,
+    callback = function()
+      M.assign()
+    end,
   })
 end
 

@@ -16,24 +16,6 @@ return {
 
   { "nui.nvim" },
 
-  { -- breadcrumbs and object tree
-    "aerial.nvim",
-
-    event = "DeferredUIEnter",
-    after = function()
-      local opts = {
-        backends    = { "treesitter", "lsp" },
-        layout      = { max_width = { 40, 0.2 }, min_width = 25 },
-        show_guides = true,
-        attach_mode = "window",
-        filter_kind = false,
-      }
-
-      require("aerial").setup(opts)
-      vim.keymap.set("n", "<leader>lS", "<cmd>AerialToggle<cr>", { desc = "Symbol outline" })
-    end
-  },
-
   -- TODO: customize this
   {
     "indent-blankline.nvim",
@@ -69,19 +51,19 @@ return {
     after = function()
       local opts = {
         preset = "modern",
-        delay  = vim.o.timeoutlen,
-        icons  = { mappings = true },
-        win    = { border = "rounded" },
+        delay = vim.o.timeoutlen,
+        icons = { mappings = true },
+        win = { border = "rounded" },
       }
       require("which-key").setup(opts)
-    end
+    end,
   },
 
   {
     "nvim_context_vt",
     after = function()
-      require('nvim_context_vt').setup({
-        prefix = '=',
+      require("nvim_context_vt").setup({
+        prefix = "=",
       })
     end,
   },
@@ -149,8 +131,12 @@ return {
     after = function()
       require("todo-comments").setup()
 
-      vim.keymap.set("n", "]t", function() require("todo-comments").jump_next() end, { desc = "Next TODO" })
-      vim.keymap.set("n", "[t", function() require("todo-comments").jump_prev() end, { desc = "Prev TODO" })
+      vim.keymap.set("n", "]t", function()
+        require("todo-comments").jump_next()
+      end, { desc = "Next TODO" })
+      vim.keymap.set("n", "[t", function()
+        require("todo-comments").jump_prev()
+      end, { desc = "Prev TODO" })
     end,
   },
 

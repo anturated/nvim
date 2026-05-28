@@ -30,11 +30,89 @@
         generatedPackages // defaultPackage;
     in
     {
+      formatter = forAllSystems (
+        pkgs:
+        pkgs.treefmt.withConfig {
+          runtimeInputs = with pkgs; [
+            # keep-sorted start
+            deadnix
+            keep-sorted
+            nixfmt
+            statix
+            stylua
+            taplo
+            # keep-sorted end
+
+            (writeShellScriptBin "statix-fix" ''
+              for file in "$@"; do
+                ${lib.getExe statix} fix "$file"
+              done
+            '')
+          ];
+
+          settings = {
+            on-unmatched = "info";
+            tree-root-file = "flake.nix";
+
+            excludes = [
+              "pkgs/izvim-plugins/_sources/*"
+            ];
+
+            formatter = {
+              # keep-sorted start block=yes newline_separated=yes
+              deadnix = {
+                command = "deadnix";
+                includes = [ "*.nix" ];
+              };
+
+              keep-sorted = {
+                command = "keep-sorted";
+                includes = [ "*" ];
+              };
+
+              nixfmt = {
+                command = "nixfmt";
+                includes = [ "*.nix" ];
+              };
+
+              statix = {
+                command = "statix-fix";
+                includes = [ "*.nix" ];
+              };
+
+              stylua = {
+                command = "stylua";
+                includes = [ "*.lua" ];
+              };
+
+              taplo = {
+                command = "taplo";
+                options = "format";
+                includes = [ "*.toml" ];
+              };
+              # keep-sorted end
+            };
+          };
+        }
+      );
+
       legacyPackages = forAllSystems (mkPackages true);
       packages = forAllSystems (mkPackages true);
 
       # homeModules.default = import ./modules/home-manager.nix inputs;
 
       overlays.default = _: mkPackages false;
+
+      devShells = forAllSystems (pkgs: {
+        default = pkgs.mkShellNoCC {
+          inputsFrom = [ self.formatter.${pkgs.stdenv.hostPlatform.system} ];
+          packages = [
+            self.formatter.${pkgs.stdenv.hostPlatform.system}
+            pkgs.selene
+            pkgs.stylua
+            pkgs.lua-language-server
+          ];
+        };
+      });
     };
 }

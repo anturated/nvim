@@ -5,15 +5,15 @@ return {
     after = function()
       local opts = {
         keymap = {
-          preset        = "default",
+          preset = "default",
           -- i'm weird like that
-          ["<C-j>"]     = { "select_next", "snippet_forward", "fallback" },
-          ["<C-k>"]     = { "select_prev", "snippet_backward", "fallback" },
-          ["<Tab>"]     = { "select_next", "snippet_forward", "fallback" },
-          ["<S-Tab>"]   = { "select_prev", "snippet_backward", "fallback" },
+          ["<C-j>"] = { "select_next", "snippet_forward", "fallback" },
+          ["<C-k>"] = { "select_prev", "snippet_backward", "fallback" },
+          ["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
+          ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
 
-          ["<CR>"]      = { "accept", "fallback" },
-          ["<C-e>"]     = { "hide" },
+          ["<CR>"] = { "accept", "fallback" },
+          ["<C-e>"] = { "hide" },
           ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
         },
 
@@ -36,29 +36,29 @@ return {
           },
 
           menu = {
-            min_width  = vim.o.pumwidth,
+            min_width = vim.o.pumwidth,
             max_height = vim.o.pumheight,
-            border     = "rounded",
-            draw       = {
+            border = "rounded",
+            draw = {
               columns = {
-                { "label",     "label_description", gap = 1 },
+                { "label", "label_description", gap = 1 },
                 { "kind_icon", "kind" },
               },
             },
           },
 
           documentation = {
-            auto_show          = true,
+            auto_show = true,
             auto_show_delay_ms = 200,
-            window             = { border = "rounded" },
+            window = { border = "rounded" },
           },
 
-          ghost_text = { enabled = true, },
+          ghost_text = { enabled = true },
         },
 
         signature = {
           enabled = true,
-          window  = { border = "rounded" },
+          window = { border = "rounded" },
         },
 
         -- default list of enabled providers defined so that you can extend it
@@ -70,14 +70,14 @@ return {
 
           transform_items = function(_, items)
             return vim
-                .iter(ipairs(items))
-                :map(function(_, item)
-                  if item.kind == require("blink.cmp.types").CompletionItemKind.Snippet then
-                    item.score_offset = item.score_offset + 1
-                  end
-                  return item
-                end)
-                :totable()
+              .iter(ipairs(items))
+              :map(function(_, item)
+                if item.kind == require("blink.cmp.types").CompletionItemKind.Snippet then
+                  item.score_offset = item.score_offset + 1
+                end
+                return item
+              end)
+              :totable()
           end,
           min_keyword_length = function()
             local default = 1

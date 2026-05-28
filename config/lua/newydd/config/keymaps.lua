@@ -1,9 +1,7 @@
 vim.g.mapleader = " "
 
-
 vim.keymap.set("n", "j", "gj", { desc = "Down (visual line)" })
 vim.keymap.set("n", "k", "gk", { desc = "Up (visual line)" })
-
 
 -- window navigation
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Window left" })
@@ -60,14 +58,16 @@ local function open_diag_float()
     vim.api.nvim_win_close(diag_float_win, true)
   end
   local _, win = vim.diagnostic.open_float({
-    scope      = "line",
-    border     = "rounded",
-    header     = false, -- removes the blank line + "Diagnostics:" label
-    source     = "if_many",
-    prefix     = function(_, i, _) return i > 1 and string.format("%d. ", i) or "" end,
-    max_width  = 80,
+    scope = "line",
+    border = "rounded",
+    header = false, -- removes the blank line + "Diagnostics:" label
+    source = "if_many",
+    prefix = function(_, i, _)
+      return i > 1 and string.format("%d. ", i) or ""
+    end,
+    max_width = 80,
     max_height = 20,
-    focusable  = false,
+    focusable = false,
   })
   diag_float_win = win
 end
@@ -79,18 +79,26 @@ end
 
 vim.keymap.set("n", "<leader>ld", open_diag_float, { desc = "Line diagnostics" })
 
-vim.keymap.set("n", "]d", function() diag_jump({ count = 1 }) end, { desc = "Next diagnostic" })
-vim.keymap.set("n", "[d", function() diag_jump({ count = -1 }) end, { desc = "Prev diagnostic" })
+vim.keymap.set("n", "]d", function()
+  diag_jump({ count = 1 })
+end, { desc = "Next diagnostic" })
+vim.keymap.set("n", "[d", function()
+  diag_jump({ count = -1 })
+end, { desc = "Prev diagnostic" })
 
-vim.keymap.set("n", "]w", function() diag_jump({ count = 1, severity = vim.diagnostic.severity.WARN }) end,
-  { desc = "Next warning" })
-vim.keymap.set("n", "[w", function() diag_jump({ count = -1, severity = vim.diagnostic.severity.WARN }) end,
-  { desc = "Prev warning" })
+vim.keymap.set("n", "]w", function()
+  diag_jump({ count = 1, severity = vim.diagnostic.severity.WARN })
+end, { desc = "Next warning" })
+vim.keymap.set("n", "[w", function()
+  diag_jump({ count = -1, severity = vim.diagnostic.severity.WARN })
+end, { desc = "Prev warning" })
 
-vim.keymap.set("n", "]e", function() diag_jump({ count = 1, severity = vim.diagnostic.severity.ERROR }) end,
-  { desc = "Next error" })
-vim.keymap.set("n", "[e", function() diag_jump({ count = -1, severity = vim.diagnostic.severity.ERROR }) end,
-  { desc = "Prev error" })
+vim.keymap.set("n", "]e", function()
+  diag_jump({ count = 1, severity = vim.diagnostic.severity.ERROR })
+end, { desc = "Next error" })
+vim.keymap.set("n", "[e", function()
+  diag_jump({ count = -1, severity = vim.diagnostic.severity.ERROR })
+end, { desc = "Prev error" })
 
 ------------
 --- misc ---

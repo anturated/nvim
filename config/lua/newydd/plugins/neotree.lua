@@ -14,8 +14,8 @@ return {
           },
         },
         filesystem = {
-          filtered_items         = { hide_dotfiles = false, hide_gitignored = true },
-          follow_current_file    = { enabled = true },
+          filtered_items = { hide_dotfiles = false, hide_gitignored = true },
+          follow_current_file = { enabled = true },
           use_libuv_file_watcher = true,
         },
 
@@ -40,6 +40,6 @@ return {
       require("lz.n").trigger_load("nui.nvim")
       require("neo-tree").setup(opts)
       vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Toggle file tree" })
-    end
+    end,
   },
 }

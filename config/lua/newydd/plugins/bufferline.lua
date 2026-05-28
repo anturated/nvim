@@ -56,9 +56,9 @@ return {
             -- see if we have tabs with that same name
             local dupes = vim.tbl_filter(function(b)
               return b ~= self.bufnr
-                  and vim.bo[b].buflisted
-                  and vim.api.nvim_buf_is_valid(b)
-                  and vim.fn.fnamemodify(vim.api.nvim_buf_get_name(b), ":t") == tail
+                and vim.bo[b].buflisted
+                and vim.api.nvim_buf_is_valid(b)
+                and vim.fn.fnamemodify(vim.api.nvim_buf_get_name(b), ":t") == tail
             end, vim.api.nvim_list_bufs())
 
             if #dupes == 0 then
@@ -74,10 +74,12 @@ return {
                 local candidate = table.concat(parts, "/", i)
                 local still_dupes = vim.tbl_filter(function(b)
                   local other = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(b), ":~:.")
-                  return other:sub(- #candidate) == candidate
+                  return other:sub(-#candidate) == candidate
                 end, dupes)
                 name = candidate
-                if #still_dupes == 0 then break end
+                if #still_dupes == 0 then
+                  break
+                end
               end
             end
           end
@@ -91,7 +93,7 @@ return {
 
             if pos then
               self.pre = name:sub(1, pos - 1)
-              self.hi  = name:sub(pos, pos)
+              self.hi = name:sub(pos, pos)
               self.suf = name:sub(pos + 1)
               return
             end
@@ -109,9 +111,15 @@ return {
 
         -- THIS IS THE ACTUAL STRUCTURE
         { provider = " " },
-        { provider = function(self) return self.pre end },
         {
-          provider = function(self) return self.hi end,
+          provider = function(self)
+            return self.pre
+          end,
+        },
+        {
+          provider = function(self)
+            return self.hi
+          end,
 
           -- highlight for the one letter
           hl = function()
@@ -123,7 +131,11 @@ return {
             end
           end,
         },
-        { provider = function(self) return self.suf end },
+        {
+          provider = function(self)
+            return self.suf
+          end,
+        },
         { provider = " " },
       }
 
@@ -138,7 +150,7 @@ return {
         {
           condition = function(self)
             return not vim.api.nvim_get_option_value("modifiable", { buf = self.bufnr })
-                or vim.api.nvim_get_option_value("readonly", { buf = self.bufnr })
+              or vim.api.nvim_get_option_value("readonly", { buf = self.bufnr })
           end,
 
           provider = function(self)
@@ -148,7 +160,6 @@ return {
               return " "
             end
           end,
-
         },
       }
 
@@ -170,7 +181,7 @@ return {
         -- close on middle click or open
         on_click = {
           callback = function(_, minwid, _, button)
-            if (button == "m") then -- middle mouse button
+            if button == "m" then -- middle mouse button
               vim.schedule(function()
                 vim.api.nvim_buf_delete(minwid, { force = false })
               end)
@@ -191,17 +202,13 @@ return {
       }
 
       -- tab component used below
-      local TablineBufferBlock = utils.surround(
-        { "", "" },
-        function(self)
-          if self.is_active then
-            return hl("TabLineSel").bg
-          else
-            return hl("TabLine").bg
-          end
-        end,
-        TablineFileNameBlock
-      )
+      local TablineBufferBlock = utils.surround({ "", "" }, function(self)
+        if self.is_active then
+          return hl("TabLineSel").bg
+        else
+          return hl("TabLine").bg
+        end
+      end, TablineFileNameBlock)
 
       -- the assembled bufferline
       local BufferLine = utils.make_buflist(
@@ -210,43 +217,12 @@ return {
         { provider = "  ", hl = hl("TabLineFill") }
       )
 
-      -------------------------------------
-      --- THE EVER MOURNFUL BREADCRUMBS ---
-      -------------------------------------
-
-      -- FIXME: window filtering bs
-
-      local Breadcrumbs = {
-        condition = function()
-          local ok, aerial = pcall(require, "aerial")
-          if not ok then return false end
-          return aerial.get_location() ~= nil
-        end,
-
-        update = { "CursorMoved", "BufEnter" },
-
-        provider = function()
-          local ok, aerial = pcall(require, "aerial")
-          if not ok then return "" end
-
-          local loc = aerial.get_location()
-          if not loc or #loc == 0 then return "" end
-
-          local parts = {}
-          for _, item in ipairs(loc) do
-            table.insert(parts, (item.icon .. " " or "") .. item.name)
-          end
-          return "  " .. table.concat(parts, " › ")
-        end,
-      }
-
       -----------------------
       --- THE ACTUAL OPTS ---
       -----------------------
 
       local opts = {
         tabline = BufferLine,
-        winbar = Breadcrumbs,
       }
 
       buf_nav.setup()
@@ -300,18 +276,24 @@ return {
       vim.keymap.set("n", "<leader>bl", function()
         local cur = vim.api.nvim_get_current_buf()
         for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-          if buf == cur then break end
-          if vim.bo[buf].buflisted then vim.cmd("bdelete " .. buf) end
+          if buf == cur then
+            break
+          end
+          if vim.bo[buf].buflisted then
+            vim.cmd("bdelete " .. buf)
+          end
         end
       end, { desc = "Buffer: close left" })
 
       -- close right
       vim.keymap.set("n", "<leader>br", function()
-        local cur  = vim.api.nvim_get_current_buf()
+        local cur = vim.api.nvim_get_current_buf()
         local past = false
         for _, buf in ipairs(vim.api.nvim_list_bufs()) do
           if past then
-            if vim.bo[buf].buflisted then vim.cmd("bdelete " .. buf) end
+            if vim.bo[buf].buflisted then
+              vim.cmd("bdelete " .. buf)
+            end
           elseif buf == cur then
             past = true
           end
@@ -331,13 +313,17 @@ return {
       -- split and pick horizontal
       vim.keymap.set("n", "<leader>b\\", function()
         vim.cmd("split")
-        buf_nav.pick(function(buf) vim.api.nvim_set_current_buf(buf) end)
+        buf_nav.pick(function(buf)
+          vim.api.nvim_set_current_buf(buf)
+        end)
       end, { desc = "Split horizontal + pick buffer" })
       -- vertical
       vim.keymap.set("n", "<leader>b|", function()
         vim.cmd("vsplit")
-        buf_nav.pick(function(buf) vim.api.nvim_set_current_buf(buf) end)
+        buf_nav.pick(function(buf)
+          vim.api.nvim_set_current_buf(buf)
+        end)
       end, { desc = "Split vertical + pick buffer" })
-    end
+    end,
   },
 }

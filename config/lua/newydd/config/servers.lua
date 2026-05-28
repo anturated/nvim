@@ -3,8 +3,7 @@ require("lz.n").trigger_load({
 })
 
 local lsp_present, lspconfig = pcall(require, "lspconfig")
--- TODO: we can ditch aerial honestly
--- local navic_present, navic = pcall(require, "nvim-navic")
+local navic_present, navic = pcall(require, "nvim-navic")
 
 if not lsp_present then
   vim.notify("lspconfig not present", vim.log.levels.ERROR)
@@ -31,9 +30,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
       return
     end
 
-    -- if navic_present and client.server_capabilities.documentSymbolProvider then
-    --   navic.attach(client, ev.buf)
-    -- end
+    if navic_present and client.server_capabilities.documentSymbolProvider then
+      navic.attach(client, ev.buf)
+    end
 
     vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
 
@@ -76,7 +75,10 @@ local servers = {
     settings = {
       deno = {
         inlayHints = {
-          parameterNames = { enabled = "all", suppressWhenArgumentMatchesName = true },
+          parameterNames = {
+            enabled = "all",
+            suppressWhenArgumentMatchesName = true,
+          },
           parameterTypes = { enabled = true },
           variableTypes = { enabled = true, suppressWhenTypeMatchesName = true },
           propertyDeclarationTypes = { enabled = true },
@@ -237,11 +239,9 @@ local servers = {
         schemas = vim.tbl_extend("keep", {
           ["https://json.schemastore.org/github-action"] = ".github/action.{yaml,yml}",
           ["https://json.schemastore.org/github-workflow"] = ".github/workflows/*",
-          ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] =
-          "*lab-ci.{yaml,yml}",
+          ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = "*lab-ci.{yaml,yml}",
           ["https://json.schemastore.org/helmfile"] = "helmfile.{yaml,yml}",
-          ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] =
-          "docker-compose.{yml,yaml}",
+          ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "docker-compose.{yml,yaml}",
           ["https://goreleaser.com/static/schema.json"] = ".goreleaser.{yml,yaml}",
         }, require("schemastore").yaml.schemas()),
       },
