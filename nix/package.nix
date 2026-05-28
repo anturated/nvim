@@ -45,6 +45,7 @@ wrapNeovim {
   optPlugins = with vimPlugins; [
     snacks-nvim
     gitsigns-nvim
+    evergarden-nvim
 
   ];
 
