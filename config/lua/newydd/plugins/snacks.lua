@@ -10,7 +10,7 @@ return {
 
       ---@type snacks.Config
       local opts   = {
-        dashboard    = {
+        dashboard = {
           enabled = true,
           sections = {
             { section = "header" },
@@ -18,29 +18,19 @@ return {
           },
         },
 
-        terminal     = {
+        terminal  = {
           enabled = true,
           win = { wo = { winbar = "" }, -- remove winbar
           },
         },
 
-        -- TODO: try delegate to... whatever plugin i forgot
-        -- this doesn't work quite right with nix
-        indent       = {
-          enabled = true, -- indent guides
-          blank   = " ",  -- don't bleed into other blocks
-          scope   = {
-            enabled = true,
-            -- disable for nix because treesitter is bad for that
-            -- filter  = function(buf) return vim.bo[buf].filetype ~= "nix" end,
-          },
-        },
 
         notifier     = { enabled = true, timeout = 3000 },
         picker       = { enabled = true },
         bigfile      = { enabled = true }, -- disable features for large files
         lazygit      = { enabled = true },
 
+        indent       = { enabled = false }, -- blankline handles this
         scope        = { enabled = false },
         statuscolumn = { enabled = false }, -- pretty sign/fold column
         words        = { enabled = false }, -- vim-illuminate handles this

@@ -48,6 +48,10 @@ wrapNeovim {
     evergarden-nvim
     lualine-nvim
     neo-tree-nvim
+    nui-nvim
+    aerial-nvim
+    mini-icons
+    indent-blankline-nvim
 
   ];
 
