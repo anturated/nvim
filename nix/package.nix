@@ -46,6 +46,7 @@ wrapNeovim {
     snacks-nvim
     gitsigns-nvim
     evergarden-nvim
+    lualine-nvim
 
   ];
 
