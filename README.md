@@ -41,4 +41,4 @@ nix profile add github:anturated/nvim
 ```
 
 ## Thank/Credit
-[isabelroses](https://github.com/isabelroses/nvim) - inspo for packaging this
+[isabelroses](https://github.com/isabelroses/nvim) - inspo for packaging this and some snippets

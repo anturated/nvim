@@ -2,7 +2,25 @@
   lib,
 
   # binary deps
+  fd,
+  ripgrep,
   lazygit,
+
+  # LSPs and other stuff
+  harper,
+  marksman,
+  tinymist,
+  nil,
+  statix,
+  deadnix,
+  nixfmt,
+  shfmt,
+  shellcheck,
+  bash-language-server,
+  proselint,
+  taplo,
+  yaml-language-server,
+  vscode-langservers-extracted,
 
   # stuff that makes this work
   wrapNeovim,
@@ -58,18 +76,48 @@ wrapNeovim {
     fidget-nvim
     todo-comments-nvim
     nvim-colorizer-lua
+    blink-cmp
+    formatter-nvim
+    SchemaStore-nvim
+    nvim-lint
 
   ];
 
   # binary deps
   extraPackages = flatten [
     [
+      # snacks deps
+      fd
+      ripgrep
       lazygit
     ]
 
     # lsps if you want
+    # these should allow editing configs, the rest you put in shell.nix
+    # there still should be configs for a lot of them in servers.lua
     (optionals bundleLSPs [
+      # json and by conincidence web stuff
+      vscode-langservers-extracted
+      # md
+      harper
+      marksman
+      tinymist
 
+      # nix
+      nil
+      statix
+      deadnix
+      nixfmt
+
+      # shell
+      shfmt
+      shellcheck
+      bash-language-server
+
+      # misc
+      proselint
+      taplo # toml
+      yaml-language-server # yaml
     ])
   ];
 }
