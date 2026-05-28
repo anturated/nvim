@@ -58,3 +58,19 @@ vim.o.laststatus         = 3
 vim.opt.shortmess:append("sIc") -- suppress various noisy messages
 vim.o.title       = true
 vim.o.titlestring = "%{fnamemodify(getcwd(), ':~')} - Nvim"
+
+vim.diagnostic.config({
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = '',
+            [vim.diagnostic.severity.WARN] = '',
+            [vim.diagnostic.severity.INFO] = '󰋇',
+            [vim.diagnostic.severity.HINT] = '󰌵',
+        },
+    },
+    float = {
+        border     = "rounded",
+        max_width  = 80,
+        max_height = 20,
+    },
+})
