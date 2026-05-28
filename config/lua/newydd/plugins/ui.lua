@@ -61,4 +61,119 @@ return {
       })
     end,
   },
+
+  {
+    "which-key.nvim",
+
+    event = "DeferredUIEnter",
+    after = function()
+      local opts = {
+        preset = "modern",
+        delay  = vim.o.timeoutlen,
+        icons  = { mappings = true },
+        win    = { border = "rounded" },
+      }
+      require("which-key").setup(opts)
+    end
+  },
+
+  {
+    "nvim_context_vt",
+    after = function()
+      require('nvim_context_vt').setup({
+        prefix = '=',
+      })
+    end,
+  },
+
+  {
+    "fidget.nvim",
+    event = "DeferredUIEnter",
+    after = function()
+      require("fidget").setup({
+        notification = {
+          window = { normal_hl = "MsgArea", winblend = 100 },
+        },
+        progress = {
+          display = { done_icon = "󰗡" },
+          ignore = {
+            "null-ls",
+          },
+        },
+        integration = {
+          ["nvim-tree"] = { enable = true },
+        },
+      })
+    end,
+  },
+
+  { -- used to use brenoprata10/nvim-highlight-colors,
+    -- let's see what this one does
+    "nvim-colorizer.lua",
+    event = "DeferredUIEnter",
+    after = function()
+      require("colorizer").setup({
+        user_default_options = {
+          RGB = true,
+          RRGGBB = true,
+          names = false,
+          RRGGBBAA = true,
+          AARRGGBB = false,
+          rgb_fn = false,
+          hsl_fn = false,
+          css = false,
+          css_fn = false,
+          mode = "background",
+          tailwind = "both",
+          sass = {
+            enable = true,
+            parsers = { css = true },
+          },
+          virtualtext = " ",
+        },
+
+        buftypes = {
+          "*",
+          "!dashboard",
+          "!lazy",
+          "!popup",
+          "!prompt",
+        },
+      })
+    end,
+  },
+
+  {
+    "todo-comments.nvim",
+    event = "DeferredUIEnter",
+    after = function()
+      require("todo-comments").setup()
+
+      vim.keymap.set("n", "]t", function() require("todo-comments").jump_next() end, { desc = "Next TODO" })
+      vim.keymap.set("n", "[t", function() require("todo-comments").jump_prev() end, { desc = "Prev TODO" })
+    end,
+  },
+
+  -- TODO: figure out if this exists in nixpkgs
+  -- highlight all instances of the word under cursor
+  -- {
+  --   "vim-illuminate",
+  --   event = "DeferredUIEnter",
+  --
+  --   after = function()
+  --     local illuminate = require("illuminate")
+  --
+  --     local opts = {
+  --       delay              = 200,
+  --       filetypes_denylist = { "neo-tree", "aerial", "help", "TelescopePrompt" },
+  --     }
+  --
+  --     illuminate.configure(opts)
+  --
+  --     -- honestly why when * and # exists i don't even use this
+  --     -- NOTE: i don't use this maybe remove????
+  --     vim.keymap.set("n", "]]", function() illuminate.goto_next_reference(false) end, { desc = "Next reference" })
+  --     vim.keymap.set("n", "[[", function() illuminate.goto_prev_reference(false) end, { desc = "Prev reference" })
+  --   end
+  -- },
 }

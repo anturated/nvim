@@ -53,6 +53,11 @@ wrapNeovim {
     mini-icons
     indent-blankline-nvim
     heirline-nvim
+    which-key-nvim
+    nvim_context_vt # TODO: check out nvim-treesitter-context
+    fidget-nvim
+    todo-comments-nvim
+    nvim-colorizer-lua
 
   ];
 
