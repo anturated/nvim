@@ -47,6 +47,7 @@ wrapNeovim {
     gitsigns-nvim
     evergarden-nvim
     lualine-nvim
+    neo-tree-nvim
 
   ];
 
