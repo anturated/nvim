@@ -142,15 +142,6 @@ local servers = {
       "typescript",
     },
   },
-  harper_ls = {
-    settings = {
-      ["harper-ls"] = {
-        linters = {
-          SentenceCapitalization = false,
-        },
-      },
-    },
-  },
   helm_ls = {},
   hls = {},
   html = {},

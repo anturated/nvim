@@ -7,7 +7,6 @@
   lazygit,
 
   # LSPs and other stuff
-  harper,
   marksman,
   tinymist,
   nil,
@@ -102,7 +101,6 @@ wrapNeovim {
       vscode-langservers-extracted
 
       # md
-      harper
       marksman
       tinymist
 
