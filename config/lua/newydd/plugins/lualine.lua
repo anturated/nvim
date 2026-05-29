@@ -63,7 +63,18 @@ return {
               end,
             },
           },
-          lualine_y = { "location" },
+          lualine_y = {
+            {
+              function()
+                return ""
+              end,
+              cond = function()
+                return vim.treesitter.highlighter.active[vim.api.nvim_get_current_buf()] ~= nil
+              end,
+            },
+            "filetype",
+            "location",
+          },
           lualine_z = {},
         },
         inactive_sections = {
