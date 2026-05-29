@@ -62,6 +62,7 @@ wrapNeovim {
 
   # plugins loaded on demand
   optPlugins = with vimPlugins; [
+    # keep-sorded
     snacks-nvim
     gitsigns-nvim
     evergarden-nvim
@@ -82,6 +83,9 @@ wrapNeovim {
     SchemaStore-nvim
     nvim-lint
     resession-nvim
+    nvim-autopairs
+    nvim-surround
+    # keep-sorded end
   ];
 
   # binary deps

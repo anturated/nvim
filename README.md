@@ -40,5 +40,15 @@ or if you're like that:
 nix profile add github:anturated/nvim
 ```
 
+## TODO
+- [x] autopairs
+- [ ] qmlls
+- [ ] omnisharp
+- [ ] better banner (or at least color it)
+- [ ] kanagawa paper
+- [ ] breadcrumbs
+- [ ] notif picker or bind
+- [ ] look through todos
+
 ## Thank/Credit
 [isabelroses](https://github.com/isabelroses/nvim) - inspo for packaging this and some snippets
