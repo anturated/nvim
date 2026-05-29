@@ -22,9 +22,20 @@ return {
       ----------------
 
       -- autosave on exit
+      local function has_real_buffers()
+        for _, buf in ipairs(vim.fn.getbufinfo({ buflisted = 1 })) do
+          if vim.fn.filereadable(buf.name) == 1 then
+            return true
+          end
+        end
+        return false
+      end
+
       vim.api.nvim_create_autocmd("VimLeavePre", {
         callback = function()
-          resession.save(vim.fn.getcwd(), { dir = "dirsession", notify = false })
+          if has_real_buffers() then
+            resession.save(vim.fn.getcwd(), { dir = "dirsession", notify = false })
+          end
         end,
       })
 
@@ -36,7 +47,7 @@ return {
       }
 
       -- auto load on startup
-      local function should_load_session()
+      local function is_good_dir()
         local cwd = vim.fn.getcwd()
         for _, dir in ipairs(excluded_dirs) do
           if cwd == dir then
@@ -46,17 +57,36 @@ return {
         return true
       end
 
+      local function has_args()
+        return vim.fn.argc(-1) > 0
+      end
+
       vim.api.nvim_create_autocmd("User", {
         pattern = "SnacksDashboardClosed",
         group = vim.api.nvim_create_augroup("newydd.dashboard-restore", { clear = true }),
+
+        nested = true,
+
         callback = function()
           vim.schedule(function()
-            if vim.fn.argc() == 0 and should_load_session() then
-              resession.load(vim.fn.getcwd(), { dir = "dirsession", silence_errors = true })
+            -- bail if file passed as an arg
+            if has_args() then
+              return
             end
+
+            -- bail from home and such
+            if not is_good_dir() then
+              return
+            end
+
+            -- bail if something was manually opened
+            if has_real_buffers() then
+              return
+            end
+
+            resession.load(vim.fn.getcwd(), { dir = "dirsession", silence_errors = true })
           end)
         end,
-        nested = true,
       })
 
       ---------------
