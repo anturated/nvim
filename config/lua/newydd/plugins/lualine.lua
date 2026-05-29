@@ -104,7 +104,23 @@ return {
             },
           },
         },
-        inactive_winbar = {},
+        inactive_winbar = {
+          lualine_c = { "navic" },
+          lualine_x = {
+            {
+              function()
+                return "  "
+              end,
+              cond = function()
+                local present, navic = pcall(require, "nvim-navic")
+                if not present then
+                  return false
+                end
+                return navic.is_available()
+              end,
+            },
+          },
+        },
         extensions = {},
       }
 
