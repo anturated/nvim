@@ -144,13 +144,6 @@ return {
           end,
           desc = "Find colorschemes",
         },
-        -- {
-        --   "<leader>fn",
-        --   function()
-        --     Snacks.picker.notifications()
-        --   end,
-        --   desc = "Find notifications",
-        -- },
         -- LSP
         {
           "<leader>ls",
@@ -167,31 +160,6 @@ return {
           end,
           mode = { "n", "t" },
           desc = "Toggle terminal",
-        },
-        -- escape terminal without closing
-        {
-          "<C-h>",
-          "<C-\\><C-n><C-w>h",
-          mode = { "t" },
-          desc = "Terminal: go left",
-        },
-        {
-          "<C-j>",
-          "<C-\\><C-n><C-w>j",
-          mode = { "t" },
-          desc = "Terminal: go down",
-        },
-        {
-          "<C-k>",
-          "<C-\\><C-n><C-w>k",
-          mode = { "t" },
-          desc = "Terminal: go up",
-        },
-        {
-          "<C-l>",
-          "<C-\\><C-n><C-w>l",
-          mode = { "t" },
-          desc = "Terminal: go right",
         },
         -- Misc
         {
