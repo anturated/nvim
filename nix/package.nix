@@ -111,7 +111,7 @@ wrapNeovim {
 
   # plugins loaded on demand
   optPlugins = with vimPlugins; [
-    # keep-sorded
+    # keep-sorded start
     snacks-nvim
     gitsigns-nvim
     evergarden-nvim
