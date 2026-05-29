@@ -213,8 +213,8 @@ return {
       -- the assembled bufferline
       local BufferLine = utils.make_buflist(
         TablineBufferBlock,
-        { provider = "  ", hl = hl("TabLineFill") },
-        { provider = "  ", hl = hl("TabLineFill") }
+        { provider = "  ", hl = { fg = "TabLineFillFg" } },
+        { provider = "  ", hl = { fg = "TabLineFillFg" } }
       )
 
       -----------------------
