@@ -10,7 +10,11 @@ return {
           theme = "auto",
           component_separators = {},
           section_separators = { left = "", right = "" },
-          disabled_filetypes = { statusline = { "neotree" } },
+          disabled_filetypes = {
+            statusline = {
+              "snacks_dashboard",
+            },
+          },
           ignore_focus = {},
           always_divide_middle = true,
           always_show_tabline = true,
