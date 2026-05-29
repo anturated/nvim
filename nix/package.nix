@@ -134,6 +134,7 @@ wrapNeovim {
     resession-nvim
     nvim-autopairs
     nvim-surround
+    vim-sleuth
     # keep-sorded end
   ];
 

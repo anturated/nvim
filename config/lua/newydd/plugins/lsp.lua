@@ -20,6 +20,9 @@ return {
 
   { "nvim-navic" },
 
+  -- guess indent
+  { "vim-sleuth" },
+
   {
     "formatter.nvim",
     event = "DeferredUIEnter",
