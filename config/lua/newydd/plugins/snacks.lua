@@ -131,14 +131,14 @@ return {
           desc = "Find highlights",
         },
         {
-          "<leader>fT",
+          "<leader>ft",
           function()
             Snacks.picker.todo_comments()
           end,
           desc = "Find TODOs",
         },
         {
-          "<leader>ft",
+          "<leader>fT",
           function()
             Snacks.picker.colorschemes()
           end,
