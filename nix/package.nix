@@ -7,8 +7,6 @@
   lazygit,
 
   # LSPs and other stuff
-  marksman,
-  tinymist,
   nil,
   statix,
   deadnix,
@@ -16,7 +14,6 @@
   shfmt,
   shellcheck,
   bash-language-server,
-  proselint,
   taplo,
   yaml-language-server,
   vscode-langservers-extracted,
@@ -39,48 +36,34 @@ let
       # keep-sorted start
       bash
       c
+      c_sharp
       comment
       cpp
-      c_sharp
       css
       csv
-      dhall
       diff
       dockerfile
       git_rebase
       gitattributes
       gitcommit
       gitignore
-      gleam
-      go
-      gomod
-      gosum
-      gotmpl
-      graphql
-      haskell
       html
       javascript
       jsdoc
       json
       just
-      latex
       lua
       make
       markdown
       markdown_inline
       nix
-      nu
-      php
-      purescript
       python
       qmldir
       qmljs
       toml
       tsx
       typescript
-      typst
       yaml
-      yuck
       # keep-sorted end
     ]
   );
@@ -90,11 +73,6 @@ wrapNeovim {
 
   versionSuffix = newyddVersion;
   basePackage = neovim-unwrapped;
-
-  # aliases = [
-  #   "vi"
-  #   "vim"
-  # ];
 
   userConfig = ../config;
 
@@ -111,31 +89,31 @@ wrapNeovim {
 
   # plugins loaded on demand
   optPlugins = with vimPlugins; [
-    # keep-sorded start
-    snacks-nvim
-    gitsigns-nvim
+    # keep-sorted start
+    SchemaStore-nvim
+    blink-cmp
     evergarden-nvim
+    fidget-nvim
+    formatter-nvim
+    gitsigns-nvim
+    heirline-nvim
+    indent-blankline-nvim
     lualine-nvim
+    mini-icons
     neo-tree-nvim
     nui-nvim
-    nvim-navic
-    mini-icons
-    indent-blankline-nvim
-    heirline-nvim
-    which-key-nvim
-    nvim_context_vt # TODO: check out nvim-treesitter-context
-    fidget-nvim
-    todo-comments-nvim
-    nvim-colorizer-lua
-    blink-cmp
-    formatter-nvim
-    SchemaStore-nvim
-    nvim-lint
-    resession-nvim
     nvim-autopairs
+    nvim-colorizer-lua
+    nvim-lint
+    nvim-navic
     nvim-surround
+    nvim_context_vt
+    resession-nvim
+    snacks-nvim
+    todo-comments-nvim
     vim-sleuth
-    # keep-sorded end
+    which-key-nvim
+    # keep-sorted end
   ];
 
   # binary deps
@@ -154,10 +132,6 @@ wrapNeovim {
       # json and by conincidence web stuff
       vscode-langservers-extracted
 
-      # md
-      marksman
-      tinymist
-
       # nix
       nil
       statix
@@ -170,7 +144,6 @@ wrapNeovim {
       bash-language-server
 
       # misc
-      proselint
       taplo # toml
       yaml-language-server # yaml
       lua-language-server
