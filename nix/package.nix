@@ -94,7 +94,7 @@ wrapNeovim {
     blink-cmp
     evergarden-nvim
     fidget-nvim
-    formatter-nvim
+    conform-nvim
     gitsigns-nvim
     heirline-nvim
     indent-blankline-nvim

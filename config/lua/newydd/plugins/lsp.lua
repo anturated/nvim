@@ -23,27 +23,28 @@ return {
   -- guess indent
   { "vim-sleuth" },
 
-  {
-    "formatter.nvim",
+  { -- formatters
+    "conform.nvim",
     event = "DeferredUIEnter",
     after = function()
-      require("formatter").setup({
-        filetype = {
-          lua = { require("formatter.filetypes.lua").stylua },
-          nix = { require("formatter.filetypes.nix").nixfmt },
-          sh = { require("formatter.filetypes.sh").shfmt },
-          bash = { require("formatter.filetypes.sh").shfmt },
-          toml = { require("formatter.filetypes.toml").taplo },
+      local opts = {
+        format_on_save = {
+          timeout_ms = 500,
+          lsp_format = "fallback",
         },
-      })
 
-      local augroup = vim.api.nvim_create_augroup
-      local autocmd = vim.api.nvim_create_autocmd
-      augroup("__formatter__", { clear = true })
-      autocmd("BufWritePost", {
-        group = "__formatter__",
-        command = ":FormatWrite",
-      })
+        formatters_by_ft = {
+          -- keep-sorted start
+          bash = { "shfmt" },
+          lua = { "stylua" },
+          nix = { "nixfmt" },
+          sh = { "shfmt" },
+          toml = { "taplo" },
+          -- keep-sorted end
+        },
+      }
+
+      require("conform").setup(opts)
     end,
   },
 }
