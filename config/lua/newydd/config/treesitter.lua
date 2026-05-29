@@ -38,6 +38,7 @@ vim.api.nvim_create_autocmd("FileType", {
     "php",
     "purescript",
     "python",
+    "qml",
     "qmldir",
     "qmljs",
     "toml",
