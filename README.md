@@ -42,8 +42,7 @@ nix profile add github:anturated/nvim
 
 ## TODO
 - [x] autopairs
-- [ ] qmlls
-- [ ] omnisharp
+- [x] omnisharp
 - [ ] better banner (or at least color it)
 - [ ] kanagawa paper
 - [x] breadcrumbs

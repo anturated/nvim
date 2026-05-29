@@ -184,6 +184,14 @@ local servers = {
     },
   },
   nushell = {},
+  omnisharp = {
+    cmd = {
+      "OmniSharp",
+      "--languageserver", -- required: enables LSP mode
+      "--hostPID",
+      tostring(vim.fn.getpid()),
+    },
+  },
   pyright = {},
   qmlls = {
     cmd = { "qmlls", "-E" },
