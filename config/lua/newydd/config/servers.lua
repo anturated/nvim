@@ -46,7 +46,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("gr", vim.lsp.buf.references, "References")
     map("gy", vim.lsp.buf.type_definition, "Type definition")
     map("K", vim.lsp.buf.hover, "Hover docs")
-    map("<C-k>", vim.lsp.buf.signature_help, "Signature help")
     map("lr", function()
       Snacks.input({ prompt = "Rename", default = vim.fn.expand("<cword>") }, function(new_name)
         if new_name and #new_name > 0 then
