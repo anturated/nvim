@@ -48,7 +48,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("K", vim.lsp.buf.hover, "Hover docs")
     -- TODO: maybe enable this???
     -- map("<C-k>", vim.lsp.buf.signature_help, "Signature help")
-    map("<leader>lr", vim.lsp.buf.rename, "Rename symbol")
+    map("lr", function()
+      Snacks.input({ prompt = "Rename", default = vim.fn.expand("<cword>") }, function(new_name)
+        if new_name and #new_name > 0 then
+          vim.lsp.buf.rename(new_name)
+        end
+      end)
+    end, "Rename symbol")
     map("<leader>la", vim.lsp.buf.code_action, "Code action")
     map("<leader>lf", function()
       vim.lsp.buf.format({ async = true })
