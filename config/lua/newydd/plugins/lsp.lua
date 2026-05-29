@@ -18,6 +18,8 @@ return {
     end,
   },
 
+  { "nvim-navic" },
+
   {
     "formatter.nvim",
     event = "DeferredUIEnter",
