@@ -33,8 +33,57 @@
 }:
 let
   inherit (lib) optionals flatten;
-  # HACK: YOLO for now
-  grammars = vimPlugins.nvim-treesitter.withAllGrammars;
+
+  grammars = vimPlugins.nvim-treesitter.withPlugins (
+    p: with p; [
+      # keep-sorted start
+      bash
+      c
+      comment
+      cpp
+      c_sharp
+      css
+      csv
+      dhall
+      diff
+      dockerfile
+      git_rebase
+      gitattributes
+      gitcommit
+      gitignore
+      gleam
+      go
+      gomod
+      gosum
+      gotmpl
+      graphql
+      haskell
+      html
+      javascript
+      jsdoc
+      json
+      just
+      latex
+      lua
+      make
+      markdown
+      markdown_inline
+      nix
+      nu
+      php
+      purescript
+      python
+      qmldir
+      qmljs
+      toml
+      tsx
+      typescript
+      typst
+      yaml
+      yuck
+      # keep-sorted end
+    ]
+  );
 in
 wrapNeovim {
   pname = "newydd";
