@@ -87,6 +87,48 @@ return {
           ["nvim-tree"] = { enable = true },
         },
       })
+
+      -- notif picker
+      vim.keymap.set("n", "<leader>fn", function()
+        local history = require("fidget").notification.get_history()
+        local items = {}
+
+        for i, notif in ipairs(history) do
+          local level = notif.annote or "INFO"
+          local hl = ({
+            WarningMsg = "DiagnosticWarn",
+            ErrorMsg = "DiagnosticError",
+            Question = "DiagnosticInfo",
+          })[notif.style] or "DiagnosticInfo"
+
+          local time = os.date("%H:%M:%S", notif.last_updated)
+
+          table.insert(items, {
+            idx = i,
+            text = level .. " " .. notif.message, -- used for fuzzy filtering
+            msg = notif.message,
+            lvl = level,
+            hl = hl,
+            time = time,
+            preview = {
+              text = notif.message,
+            },
+          })
+        end
+
+        Snacks.picker({
+          title = "Notifications",
+          items = items,
+          preview = "preview",
+          format = function(item, _)
+            return {
+              { item.time .. " ", "Comment" },
+              { ("%-6s"):format(item.lvl) .. " ", item.hl },
+              { item.msg },
+            }
+          end,
+        })
+      end, { desc = "Find notifications" })
     end,
   },
 

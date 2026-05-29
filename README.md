@@ -47,7 +47,7 @@ nix profile add github:anturated/nvim
 - [ ] better banner (or at least color it)
 - [ ] kanagawa paper
 - [x] breadcrumbs
-- [ ] notif picker or bind
+- [x] notif picker or bind
 - [ ] look through todos
 
 ## Thank/Credit
