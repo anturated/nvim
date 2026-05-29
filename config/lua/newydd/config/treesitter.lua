@@ -5,6 +5,7 @@ vim.api.nvim_create_autocmd("FileType", {
     "checkhealth",
     "comment",
     "cpp",
+    "cs",
     "css",
     "csv",
     "dhall",
