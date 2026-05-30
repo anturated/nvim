@@ -1,7 +1,6 @@
 # Newydd
 
-the nvim config or something.
-TODO: come up with a good description
+![preview](./pic.webp)
 
 ## Usage
 
