@@ -24,6 +24,7 @@ vim.api.nvim_create_autocmd("FileType", {
     "markdown_inline",
     "nix",
     "python",
+    "qml",
     "qmldir",
     "qmljs",
     "toml",
