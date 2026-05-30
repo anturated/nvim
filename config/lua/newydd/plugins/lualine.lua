@@ -55,15 +55,15 @@ return {
             {
               function()
                 local clients = vim.lsp.get_clients({ bufnr = 0 })
-                if #clients == 0 then
-                  return "no lsp"
-                end
                 return table.concat(
                   vim.tbl_map(function(c)
                     return c.name
                   end, clients),
                   ", "
                 )
+              end,
+              cond = function()
+                return #vim.lsp.get_clients({ bufnr = 0 }) ~= 0
               end,
             },
           },
