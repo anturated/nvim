@@ -113,6 +113,7 @@ wrapNeovim {
     snacks-nvim
     todo-comments-nvim
     vim-sleuth
+    vim-wakatime
     which-key-nvim
     # keep-sorted end
   ];
