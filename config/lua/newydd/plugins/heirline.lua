@@ -1,6 +1,4 @@
 -- A lion does not concern himself with figuring out how to configure bufferline.nvim
--- we use heirline for breadcrumbs and tabline.
--- because i don't like how wide tabs are on buferline.
 -- lualine is good enough for status bar tho
 
 return {
