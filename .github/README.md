@@ -42,10 +42,12 @@ nix profile add github:anturated/nvim
 ## TODO
 - [x] autopairs
 - [x] omnisharp
-- [ ] better banner (or at least color it)
-- [ ] kanagawa paper
+- [x] better banner (or at least color it)
 - [x] breadcrumbs
 - [x] notif picker or bind
+- [ ] nix lsp won't indent
+- [ ] accent picker
+- [ ] improve navic looks
 - [ ] look through todos
 
 ## Thank/Credit

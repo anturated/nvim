@@ -6,15 +6,11 @@ return {
     after = function()
       local snacks = require("snacks")
 
-      -- TODO: maybe steal the dashboard idea
-
-      ---@type snacks.Config
       local opts = {
         dashboard = {
           enabled = true,
           sections = {
             { section = "header" },
-            -- TODO: banner
           },
 
           preset = {

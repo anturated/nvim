@@ -182,27 +182,4 @@ return {
       end, { desc = "Prev TODO" })
     end,
   },
-
-  -- TODO: figure out if this exists in nixpkgs
-  -- highlight all instances of the word under cursor
-  -- {
-  --   "vim-illuminate",
-  --   event = "DeferredUIEnter",
-  --
-  --   after = function()
-  --     local illuminate = require("illuminate")
-  --
-  --     local opts = {
-  --       delay              = 200,
-  --       filetypes_denylist = { "neo-tree", "aerial", "help", "TelescopePrompt" },
-  --     }
-  --
-  --     illuminate.configure(opts)
-  --
-  --     -- honestly why when * and # exists i don't even use this
-  --     -- NOTE: i don't use this maybe remove????
-  --     vim.keymap.set("n", "]]", function() illuminate.goto_next_reference(false) end, { desc = "Next reference" })
-  --     vim.keymap.set("n", "[[", function() illuminate.goto_prev_reference(false) end, { desc = "Prev reference" })
-  --   end
-  -- },
 }
