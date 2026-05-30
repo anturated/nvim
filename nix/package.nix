@@ -94,6 +94,7 @@ wrapNeovim {
     blink-cmp
     evergarden-nvim
     fidget-nvim
+    cloak-nvim
     conform-nvim
     gitsigns-nvim
     heirline-nvim
