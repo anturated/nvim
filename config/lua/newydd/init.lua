@@ -1,3 +1,6 @@
+-- unload before any of that
+require("newydd.config.disable")
+
 -- keybinds need to happen before plugin loading
 require("newydd.config.autocmds")
 require("newydd.config.treesitter")
