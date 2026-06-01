@@ -94,12 +94,14 @@ wrapNeovim {
     blink-cmp
     evergarden-nvim
     fidget-nvim
+    friendly-snippets
     cloak-nvim
     conform-nvim
     gitsigns-nvim
     heirline-nvim
     indent-blankline-nvim
     lualine-nvim
+    luasnip
     mini-icons
     neo-tree-nvim
     nui-nvim

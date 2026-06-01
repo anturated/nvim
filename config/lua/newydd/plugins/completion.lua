@@ -17,6 +17,8 @@ return {
           ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
         },
 
+        snippets = { preset = "luasnip" },
+
         appearance = {
           nerd_font_variant = "mono",
           kind_icons = {}, -- use mini.icons
@@ -61,8 +63,6 @@ return {
           window = { border = "rounded" },
         },
 
-        -- default list of enabled providers defined so that you can extend it
-        -- elsewhere in your config, without redefining it, due to `opts_extend`
         sources = {
           default = { "lsp", "path", "snippets", "buffer" },
 
