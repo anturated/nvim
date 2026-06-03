@@ -66,7 +66,7 @@ return {
         sources = {
           default = { "lsp", "path", "snippets", "buffer" },
 
-          providers = { snippets = { opts = { search_paths = { vim.g.snippets_path } } } },
+          providers = { snippets = { opts = { paths = { vim.g.snippets_path } } } },
 
           transform_items = function(_, items)
             return vim
