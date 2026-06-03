@@ -1,4 +1,3 @@
-
 name: Update Flake Inputs
 on:
   workflow_dispatch:
@@ -27,8 +26,8 @@ jobs:
           git-author-email: pill@anturated.dev
           git-committer-name: Caterpillar
           git-committer-email: pill@anturated.dev
-          commit-msg: ${{ inputs.commit_msg }}
-          pr-title: ${{ inputs.commit_msg }}
+          commit-msg: "flake: bump (auto)"
+          pr-title: "flake: bump (auto)"
           branch: pill-flake-update
           pr-body: |
             ```
