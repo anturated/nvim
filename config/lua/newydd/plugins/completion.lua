@@ -17,7 +17,7 @@ return {
           ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
         },
 
-        snippets = { preset = "luasnip" },
+        snippets = { preset = "default" },
 
         appearance = {
           nerd_font_variant = "mono",
@@ -66,7 +66,8 @@ return {
         sources = {
           default = { "lsp", "path", "snippets", "buffer" },
 
-          providers = { snippets = { opts = { paths = { vim.g.snippets_path } } } },
+          -- auto loads friendly snippets
+          -- providers = { snippets = { opts = { paths = { vim.g.snippets_path } } } },
 
           transform_items = function(_, items)
             return vim

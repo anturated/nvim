@@ -24,27 +24,28 @@ return {
   { "vim-sleuth" },
 
   -- snippets loader
-  {
-    "luasnip",
-    event = "DeferredUIEnter",
-    after = function()
-      local ls = require("luasnip")
+  -- {
+  --   "luasnip",
+  --   event = "DeferredUIEnter",
+  --   after = function()
+  --     local ls = require("luasnip")
+  --
+  --     -- load vscode snippets
+  --     require("luasnip.loaders.from_vscode").lazy_load()
+  --
+  --     -- leave snippet on NORMAL mode
+  --     vim.api.nvim_create_autocmd("ModeChanged", {
+  --       pattern = { "s:n", "i:n" },
+  --       callback = function()
+  --         local buf = vim.api.nvim_get_current_buf()
+  --         if ls.session.current_nodes[buf] and not ls.session.jump_active then
+  --           ls.unlink_current()
+  --         end
+  --       end,
+  --     })
+  --   end,
+  -- },
 
-      -- load vscode snippets
-      require("luasnip.loaders.from_vscode").lazy_load()
-
-      -- leave snippet on NORMAL mode
-      vim.api.nvim_create_autocmd("ModeChanged", {
-        pattern = { "s:n", "i:n" },
-        callback = function()
-          local buf = vim.api.nvim_get_current_buf()
-          if ls.session.current_nodes[buf] and not ls.session.jump_active then
-            ls.unlink_current()
-          end
-        end,
-      })
-    end,
-  },
   -- snippets collection
   { "friendly-snippets" },
   { -- formatters
