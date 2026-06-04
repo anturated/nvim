@@ -18,6 +18,7 @@ return {
     end,
   },
 
+  -- breadcrumbs
   { "nvim-navic" },
 
   -- guess indent
