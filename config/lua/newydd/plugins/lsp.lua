@@ -24,6 +24,17 @@ return {
   -- guess indent
   { "vim-sleuth" },
 
+  -- roslyn toolkit
+  {
+    "roslyn.nvim",
+    event = "DeferredUIEnter",
+    after = function()
+      local opts = {}
+
+      require("roslyn").setup(opts)
+    end,
+  },
+
   -- snippets loader
   -- {
   --   "luasnip",

@@ -111,6 +111,7 @@ wrapNeovim {
     nvim-surround
     nvim_context_vt
     resession-nvim
+    roslyn-nvim
     snacks-nvim
     todo-comments-nvim
     vim-sleuth
