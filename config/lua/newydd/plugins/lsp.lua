@@ -29,7 +29,9 @@ return {
     "roslyn.nvim",
     event = "DeferredUIEnter",
     after = function()
-      local opts = {}
+      local opts = {
+        filewatching = "off", -- FIXME: it watches the entire nix store and probably more
+      }
 
       require("roslyn").setup(opts)
     end,
