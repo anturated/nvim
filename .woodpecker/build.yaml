@@ -1,0 +1,25 @@
+when:
+  event: push
+
+steps:
+  - name: build-and-cache
+    image: nixos/nix
+    environment:
+      CACHIX_TOKEN:
+        from_secret: ANTURATED_CACHIX_TOKEN
+    commands:
+      # configure nix
+      - |
+        export NIX_CONFIG="
+          extra-experimental-features = nix-command flakes
+          http-connections = 128
+          max-substitution-jobs = 128
+        "
+      # use cachix
+      - nix profile install nixpkgs#cachix
+      - cachix use anturated
+      # build & cache
+      - cachix authtoken $${CACHIX_TOKEN}
+      - |
+        cachix watch-exec anturated \
+        nix -- build -L

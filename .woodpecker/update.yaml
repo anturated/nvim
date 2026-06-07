@@ -1,0 +1,42 @@
+when:
+  - event: cron
+    cron: update
+
+clone:
+  - name: clone
+    image: woodpeckerci/plugin-git
+    settings:
+      username: caterpillar-bot
+      password:
+        from_secret: PILL_TOKEN
+
+steps:
+  - name: update
+    image: nixos/nix
+    environment:
+      FORGEJO_TOKEN:
+        from_secret: PILL_TOKEN
+    commands:
+      # configure git
+      - git config --global user.name "Caterpillar"
+      - git config --global user.email "pill@anturated.dev"
+      - git remote set-url origin "https://caterpillar:$${FORGEJO_TOKEN}@git.anturated.dev/${CI_REPO}.git"
+      - BEFORE=$(git rev-parse HEAD)
+      # checkout
+      - git checkout -b pill-flake-update
+      # update
+      - |
+        export NIX_CONFIG="
+          extra-experimental-features = nix-command flakes
+          http-connections = 128
+          max-substitution-jobs = 128
+        "
+      - |
+        nix flake update \
+        --commit-lock-file \
+        --commit-lockfile-summary "flake: bump (auto)"
+      # check diff push
+      - git diff --quiet $BEFORE HEAD && exit 0
+      - git checkout ${CI_REPO_DEFAULT_BRANCH}
+      - git merge --ff pill-flake-update
+      - git push -u origin ${CI_REPO_DEFAULT_BRANCH}
