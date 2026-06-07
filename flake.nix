@@ -20,22 +20,25 @@
       forAllSystems =
         f: lib.genAttrs lib.systems.flakeExposed (system: f (import nixpkgs { inherit system; }));
 
-      # do this bs so we have nix run .
-      mkPackages =
-        default: pkgs:
-        let
-          generatedPackages = import ./default.nix { inherit pkgs inputs; };
-          defaultPackage = lib.optionalAttrs default { default = generatedPackages.newydd; };
-        in
-        generatedPackages // defaultPackage;
+      versionSuffix = self.shortRev or "unstable";
     in
     {
-      legacyPackages = forAllSystems (mkPackages true);
-      packages = forAllSystems (mkPackages true);
+      packages = forAllSystems (
+        pkgs:
+        let
+          inherit (inputs.gift-wrap.legacyPackages.${pkgs.stdenv.hostPlatform.system}) wrapNeovim;
+        in
+        {
+          default = self.packages.${pkgs.stdenv.hostPlatform.system}.newydd;
+          newydd = pkgs.callPackage ./nix/package.nix { inherit wrapNeovim versionSuffix; };
+          newyddNoLsp = pkgs.callPackage ./nix/package.nix {
+            inherit wrapNeovim versionSuffix;
+            bundleLSPs = false;
+          };
+        }
+      );
 
       homeModules.default = import ./modules/home-manager.nix inputs;
-
-      overlays.default = _: mkPackages false;
 
       devShells = forAllSystems (pkgs: {
         default = pkgs.mkShellNoCC {

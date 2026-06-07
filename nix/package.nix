@@ -26,7 +26,7 @@
   vimPlugins,
 
   bundleLSPs ? true,
-  newyddVersion,
+  versionSuffix,
 }:
 let
   inherit (lib) optionals flatten;
@@ -71,7 +71,7 @@ in
 wrapNeovim {
   pname = "newydd";
 
-  versionSuffix = newyddVersion;
+  inherit versionSuffix;
   basePackage = neovim-unwrapped;
 
   userConfig = ../config;
