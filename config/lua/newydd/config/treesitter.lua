@@ -13,6 +13,7 @@ vim.api.nvim_create_autocmd("FileType", {
     "gitattributes",
     "gitcommit",
     "gitignore",
+    "go",
     "html",
     "javascript",
     "jsdoc",
