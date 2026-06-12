@@ -66,8 +66,8 @@ return {
         sources = {
           default = { "lsp", "path", "snippets", "buffer" },
 
-          -- auto loads friendly snippets
-          -- providers = { snippets = { opts = { paths = { vim.g.snippets_path } } } },
+          -- load custom snippets
+          providers = { snippets = { opts = { search_paths = { vim.g.snippets_path } } } },
 
           transform_items = function(_, items)
             return vim
