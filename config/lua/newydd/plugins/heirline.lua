@@ -20,8 +20,7 @@ return {
           TabLineFg = utils.get_highlight("TabLine").fg,
           TabLineSelBg = utils.get_highlight("TabLineSel").bg,
           TabLineSelFg = utils.get_highlight("TabLineSel").fg,
-          TabLineFillBg = utils.get_highlight("TabLineFill").bg,
-          TabLineFillFg = utils.get_highlight("TabLineFill").fg,
+          CommentFg = utils.get_highlight("Comment").fg,
           GitSignsDeleteFg = utils.get_highlight("GitSignsDelete").fg,
         }
       end
@@ -211,8 +210,8 @@ return {
       -- the assembled bufferline
       local BufferLine = utils.make_buflist(
         TablineBufferBlock,
-        { provider = "  ", hl = { fg = "TabLineFillFg" } },
-        { provider = "  ", hl = { fg = "TabLineFillFg" } }
+        { provider = "  ", hl = { fg = "CommentFg" } },
+        { provider = "  ", hl = { fg = "CommentFg" } }
       )
 
       -----------------------
