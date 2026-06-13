@@ -104,6 +104,7 @@ wrapNeovim {
     lualine-nvim
     mini-icons
     neo-tree-nvim
+    nightfox-nvim
     nui-nvim
     nvim-autopairs
     nvim-colorizer-lua

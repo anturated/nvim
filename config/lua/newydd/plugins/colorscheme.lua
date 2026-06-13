@@ -48,4 +48,18 @@ return {
       })
     end,
   },
+
+  {
+    "nightfox.nvim",
+
+    after = function()
+      local opts = {
+        options = {
+          transparent = true,
+        },
+      }
+
+      require("nightfox").setup(opts)
+    end,
+  },
 }
