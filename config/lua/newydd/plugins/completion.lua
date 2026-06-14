@@ -1,4 +1,12 @@
 return {
+  -- auto tag close
+  {
+    "nvim-ts-autotag",
+    event = "DeferredUIEnter",
+    after = function()
+      require("nvim-ts-autotag").setup()
+    end,
+  },
   {
     "blink.cmp",
     event = "DeferredUIEnter",

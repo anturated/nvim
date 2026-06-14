@@ -111,6 +111,7 @@ wrapNeovim {
     nvim-lint
     nvim-navic
     nvim-surround
+    nvim-ts-autotag
     nvim_context_vt
     resession-nvim
     roslyn-nvim
