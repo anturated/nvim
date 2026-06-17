@@ -21,7 +21,7 @@ return {
           TabLineSelBg = utils.get_highlight("TabLineSel").bg,
           TabLineSelFg = utils.get_highlight("TabLineSel").fg,
           CommentFg = utils.get_highlight("Comment").fg,
-          GitSignsDeleteFg = utils.get_highlight("GitSignsDelete").fg,
+          GitGutterDeleteFg = utils.get_highlight("GitGutterDelete").fg,
         }
       end
 
@@ -122,7 +122,7 @@ return {
           hl = function()
             if buf_nav.is_picking then
               -- HACK: probably doesn't go well with red accents
-              return { fg = hl("GitSignsDelete").fg, bold = true, underline = true }
+              return { fg = "GitGutterDeleteFg", bold = true, underline = true }
             else
               return nil
             end
