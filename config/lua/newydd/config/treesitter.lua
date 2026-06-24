@@ -28,6 +28,7 @@ vim.api.nvim_create_autocmd("FileType", {
     "qml",
     "qmldir",
     "qmljs",
+    "sh",
     "toml",
     "tsx",
     "typescript",
