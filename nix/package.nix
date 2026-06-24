@@ -27,6 +27,7 @@
 
   bundleLSPs ? true,
   versionSuffix,
+  ts-nix-numtide,
 }:
 let
   inherit (lib) optionals flatten;
@@ -57,7 +58,10 @@ let
       make
       markdown
       markdown_inline
-      nix
+      # use a fork for nix while main is stalled
+      (p.nix.overrideAttrs (_: {
+        src = ts-nix-numtide;
+      }))
       python
       qmldir
       qmljs

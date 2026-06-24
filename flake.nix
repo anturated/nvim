@@ -6,6 +6,11 @@
       url = "github:tgirlcloud/gift-wrap";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    ts-nix-numtide = {
+      url = "github:numtide/tree-sitter-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -13,6 +18,7 @@
       self,
       nixpkgs,
       gift-wrap,
+      ts-nix-numtide,
     }:
     let
       inherit (nixpkgs) lib;
@@ -30,9 +36,9 @@
         in
         {
           default = self.packages.${pkgs.stdenv.hostPlatform.system}.newydd;
-          newydd = pkgs.callPackage ./nix/package.nix { inherit wrapNeovim versionSuffix; };
+          newydd = pkgs.callPackage ./nix/package.nix { inherit wrapNeovim versionSuffix ts-nix-numtide; };
           newyddNoLsp = pkgs.callPackage ./nix/package.nix {
-            inherit wrapNeovim versionSuffix;
+            inherit wrapNeovim versionSuffix ts-nix-numtide;
             bundleLSPs = false;
           };
         }
