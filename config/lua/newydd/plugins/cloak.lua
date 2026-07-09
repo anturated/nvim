@@ -27,6 +27,8 @@ return {
         },
       }
 
+      vim.keymap.set("n", "<leader>lp", "<Cmd>CloakPreviewLine<CR>", { desc = "Cloak preview line" })
+
       require("cloak").setup(opts)
     end,
   },
