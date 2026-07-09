@@ -48,5 +48,68 @@
     "body": [
       "${1:sha256} = \"${0:sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=}\";"
     ]
+  },
+  "module": {
+    "prefix": "mod",
+    "body": [
+      "{",
+      "  lib,",
+      "  pkgs,",
+      "  config,",
+      "  ...",
+      "}:",
+      "",
+      "{",
+      "  $0",
+      "}"
+    ]
+  },
+  "configured module": {
+    "prefix": "cmod",
+    "body": [
+      "{",
+      "  lib,",
+      "  pkgs,",
+      "  config,",
+      "  ...",
+      "}:",
+      "",
+      "let",
+      "  cfg = config.${1:foobar};",
+      "in",
+      "{",
+      "  $0",
+      "}"
+    ]
+  },
+  "gopkg": {
+    "prefix": "gopkg",
+    "body": [
+      "{ buildGoModule }:",
+      "",
+      "buildGoModule {",
+      "  name = \"${1:name}\";",
+      "  src = ${2:../src};",
+      "$0",
+      "  vendorHash = ${3:null};",
+      "}"
+    ]
+  },
+  "asppkg": {
+    "body": [
+      "{ buildDotnetModule, dotnetCorePackages }:",
+      "",
+      "buildDotnetModule {",
+      "  pname = \"${1:name}\";",
+      "  version = \"${2:0.1.0}\";",
+      "  src = ${3:../.};",
+      "",
+      "  projectFile = \"${4:Project/Project.csproj}\";",
+      "  nugetDeps = ../deps.json;",
+      "",
+      "  dotnet-sdk = dotnetCorePackages.sdk_${5:10}_0;",
+      "  dotnet-runtime = dotnetCorePackages.aspnetcore_${5:10}_0;",
+      "}$0"
+    ]
   }
 }
