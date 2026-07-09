@@ -1,5 +1,6 @@
 {
   lib,
+  callPackage,
 
   # binary deps
   fd,
@@ -21,7 +22,6 @@
   stylua,
 
   # stuff that makes this work
-  wrapNeovim,
   neovim-unwrapped,
   vimPlugins,
 
@@ -31,6 +31,8 @@
 }:
 let
   inherit (lib) optionals flatten;
+
+  wrapNeovim = callPackage ./wrapper.nix { };
 
   grammars = vimPlugins.nvim-treesitter.withPlugins (
     p: with p; [

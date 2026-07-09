@@ -2,11 +2,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
-    gift-wrap = {
-      url = "github:tgirlcloud/gift-wrap";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     ts-nix-numtide = {
       url = "github:numtide/tree-sitter-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -17,7 +12,6 @@
     inputs@{
       self,
       nixpkgs,
-      gift-wrap,
       ts-nix-numtide,
     }:
     let
@@ -29,20 +23,14 @@
       versionSuffix = self.shortRev or "unstable";
     in
     {
-      packages = forAllSystems (
-        pkgs:
-        let
-          inherit (inputs.gift-wrap.legacyPackages.${pkgs.stdenv.hostPlatform.system}) wrapNeovim;
-        in
-        {
-          default = self.packages.${pkgs.stdenv.hostPlatform.system}.newydd;
-          newydd = pkgs.callPackage ./nix/package.nix { inherit wrapNeovim versionSuffix ts-nix-numtide; };
-          newyddNoLsp = pkgs.callPackage ./nix/package.nix {
-            inherit wrapNeovim versionSuffix ts-nix-numtide;
-            bundleLSPs = false;
-          };
-        }
-      );
+      packages = forAllSystems (pkgs: {
+        default = self.packages.${pkgs.stdenv.hostPlatform.system}.newydd;
+        newydd = pkgs.callPackage ./nix/package.nix { inherit versionSuffix ts-nix-numtide; };
+        newyddNoLsp = pkgs.callPackage ./nix/package.nix {
+          inherit versionSuffix ts-nix-numtide;
+          bundleLSPs = false;
+        };
+      });
 
       homeModules.default = import ./modules/home-manager.nix inputs;
 

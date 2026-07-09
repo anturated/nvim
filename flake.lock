@@ -18,26 +18,6 @@
         "type": "github"
       }
     },
-    "gift-wrap": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1773403464,
-        "narHash": "sha256-fckT48WShz/HqRgHgBKbVZCreC+Apfu3UqPZxFuL7Us=",
-        "owner": "tgirlcloud",
-        "repo": "gift-wrap",
-        "rev": "9499bc6e450d9959e2019f7122efd3b9077f333a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "tgirlcloud",
-        "repo": "gift-wrap",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1783279667,
@@ -56,7 +36,6 @@
     },
     "root": {
       "inputs": {
-        "gift-wrap": "gift-wrap",
         "nixpkgs": "nixpkgs",
         "ts-nix-numtide": "ts-nix-numtide"
       }
