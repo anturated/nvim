@@ -5,6 +5,7 @@ vim.api.nvim_create_autocmd("FileType", {
     "comment",
     "cpp",
     "cs",
+    "razor",
     "css",
     "csv",
     "diff",

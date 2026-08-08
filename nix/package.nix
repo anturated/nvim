@@ -67,6 +67,7 @@ let
       python
       qmldir
       qmljs
+      razor
       toml
       tsx
       typescript
