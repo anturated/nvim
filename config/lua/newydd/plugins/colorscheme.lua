@@ -44,6 +44,25 @@ return {
         vim.notify("Switched accent to " .. accent)
       end, {
         nargs = 1,
+        complete = function()
+          return {
+            "red",
+            "orange",
+            "yellow",
+            "lime",
+            "green",
+            "aqua",
+            "skye",
+            "snow",
+            "blue",
+            "purple",
+            "pink",
+            "cherry",
+            -- i mean these exist but autocomplete clutter
+            -- "text", "subtext1", "subtext0", "overlay2", "overlay1", "overlay0",
+            -- "surface2", "surface1", "surface0", "base", "mantle", "crust",
+          }
+        end,
         desc = "Set colorscheme accent",
       })
     end,
