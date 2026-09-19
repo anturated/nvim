@@ -200,6 +200,9 @@ local servers = {
   qmlls = {
     cmd = { "qmlls", "-E" },
   },
+  roslyn = {
+    cmd = { "Microsoft.CodeAnalysis.LanguageServer", "--stdio" }, -- note: daemon mode breaks for some reason
+  },
   serve_d = {},
   statix = {},
   -- sourcekit = {},
