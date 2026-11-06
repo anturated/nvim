@@ -6,5 +6,81 @@
       "/// $0",
       "/// </summary>"
     ]
+  },
+  "request": {
+    "prefix": "request",
+    "body": [
+      "using MediatR;",
+      "using Domain.DTO;",
+      "",
+      "namespace Application.Requests.${3:Namespace};",
+      "",
+      "public record ${1:RequestType}Request : IRequest<${2:ReturnTypeDto}>",
+      "{",
+      "    ${0:public required string Name { get; init; }}",
+      "}"
+    ]
+  },
+  "requestnoreturn": {
+    "prefix": "requestnoreturn",
+    "body": [
+      "using MediatR;",
+      "using Domain.DTO;",
+      "",
+      "namespace Application.Requests.${2:Namespace};",
+      "",
+      "public record ${1:RequestType}Request : IRequest",
+      "{",
+      "    ${0:public required string Name { get; init; }}",
+      "}"
+    ]
+  },
+  "handler": {
+    "prefix": "handler",
+    "body": [
+      "using MediatR;",
+      "using Persistence.Data;",
+      "",
+      "namespace Application.Requests.${3:Namespace};",
+      "",
+      "public class ${1:RequestType}Handler : IRequestHandler<${1:RequestType}Request, ${2:ReturnTypeDto}>",
+      "{",
+      "    private readonly StoreDbContext _context;",
+      "",
+      "    public ${1:RequestType}Handler(StoreDbContext context)",
+      "    {",
+      "        _context = context;",
+      "    }",
+      "",
+      "    public async Task<${2:ReturnTypeDto}> Handle(${1:RequestType}Request request, CancellationToken ct)",
+      "    {",
+      "        $0",
+      "    }",
+      "}"
+    ]
+  },
+  "handlernoreturn": {
+    "prefix": "handlernoreturn",
+    "body": [
+      "using MediatR;",
+      "using Persistence.Data;",
+      "",
+      "namespace Application.Requests.${2:Namespace};",
+      "",
+      "public class ${1:RequestType}Handler : IRequestHandler<${1:RequestType}Request>",
+      "{",
+      "    private readonly StoreDbContext _context;",
+      "",
+      "    public ${1:RequestType}Handler(StoreDbContext context)",
+      "    {",
+      "        _context = context;",
+      "    }",
+      "",
+      "    public async Task Handle(${1:RequestType}Request request, CancellationToken ct)",
+      "    {",
+      "        $0",
+      "    }",
+      "}"
+    ]
   }
 }
