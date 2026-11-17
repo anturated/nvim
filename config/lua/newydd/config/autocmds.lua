@@ -71,3 +71,33 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     end
   end,
 })
+
+-- make kitty's background transparent while nvim is open (needs a transparent colorscheme bg)
+-- kitty side: dynamic_background_opacity + listen_on, see dotfiles/home/desant/gui/kitty.nix
+local function kitty_opacity(v, sync)
+  local sock = vim.env.KITTY_LISTEN_ON
+  if not sock then
+    return -- not in kitty, or kitty predates the listen_on change
+  end
+  local cmd = { "kitty", "@", "--to", sock, "set-background-opacity", tostring(v) }
+  if sync then
+    vim.fn.system(cmd)
+  else
+    vim.fn.jobstart(cmd)
+  end
+end
+
+vim.api.nvim_create_autocmd({ "VimEnter", "VimResume" }, {
+  group = augroup("kitty_opacity_on"),
+  callback = function()
+    kitty_opacity(0.85)
+  end,
+})
+
+-- sync so it lands before nvim exits / suspends
+vim.api.nvim_create_autocmd({ "VimLeavePre", "VimSuspend" }, {
+  group = augroup("kitty_opacity_off"),
+  callback = function()
+    kitty_opacity(1, true)
+  end,
+})
