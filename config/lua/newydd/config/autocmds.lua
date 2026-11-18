@@ -79,6 +79,12 @@ local function kitty_opacity(v, sync)
   if not sock then
     return -- not in kitty, or kitty predates the listen_on change
   end
+  -- opacity is per kitty OS window, so only the outermost interactive nvim may touch it:
+  -- headless runs (scripts, tools) and nvims nested in a :terminal ($NVIM is set there)
+  -- would otherwise reset it to opaque on exit while the parent nvim is still open
+  if vim.env.NVIM or #vim.api.nvim_list_uis() == 0 then
+    return
+  end
   local cmd = { "kitty", "@", "--to", sock, "set-background-opacity", tostring(v) }
   if sync then
     vim.fn.system(cmd)
