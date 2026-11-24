@@ -1,3 +1,6 @@
+-- nvim calls .slang files "shaderslang", the grammar is "slang"
+vim.treesitter.language.register("slang", "shaderslang")
+
 vim.api.nvim_create_autocmd("FileType", {
   pattern = {
     "bash",
@@ -14,7 +17,9 @@ vim.api.nvim_create_autocmd("FileType", {
     "gitattributes",
     "gitcommit",
     "gitignore",
+    "glsl",
     "go",
+    "hlsl",
     "html",
     "javascript",
     "jsdoc",
@@ -30,6 +35,7 @@ vim.api.nvim_create_autocmd("FileType", {
     "qmldir",
     "qmljs",
     "sh",
+    "shaderslang",
     "toml",
     "tsx",
     "typescript",

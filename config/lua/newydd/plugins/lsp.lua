@@ -15,6 +15,19 @@ return {
         bash = { "shellcheck" },
         yaml = { "yamllint" },
       }
+
+      -- glsl: real compiler errors from glslc (glsl_analyzer only catches syntax errors).
+      -- opengl target + auto locations so plain `uniform vec2 u_resolution;` style shaders compile too
+      local lint = require("lint")
+      lint.linters.glslc.args = { "--target-env=opengl", "-fauto-map-locations", "-o", "/dev/null" }
+      vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {
+        group = vim.api.nvim_create_augroup("UserLintGlsl", { clear = true }),
+        callback = function()
+          if vim.bo.filetype == "glsl" and vim.fn.executable("glslc") == 1 then
+            lint.try_lint("glslc")
+          end
+        end,
+      })
     end,
   },
 

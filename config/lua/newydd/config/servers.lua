@@ -109,6 +109,7 @@ local servers = {
     },
   },
   gleam = {},
+  glsl_analyzer = {},
   gopls = {
     single_file_support = true,
     filetypes = { "go", "gomod", "gosum", "gotmpl", "gohtmltmpl", "gotexttmpl" },
@@ -204,6 +205,7 @@ local servers = {
     cmd = { "Microsoft.CodeAnalysis.LanguageServer", "--stdio" }, -- note: daemon mode breaks for some reason
   },
   serve_d = {},
+  slangd = {},
   statix = {},
   -- sourcekit = {},
   stylelint_lsp = {},

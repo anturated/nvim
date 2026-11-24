@@ -50,7 +50,9 @@ let
       gitattributes
       gitcommit
       gitignore
+      glsl
       go
+      hlsl
       html
       javascript
       jsdoc
@@ -68,6 +70,7 @@ let
       qmldir
       qmljs
       razor
+      slang
       toml
       tsx
       typescript
